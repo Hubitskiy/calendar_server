@@ -1,0 +1,76 @@
+version: "3.4"
+
+
+services:
+#  calery_w:
+#    build:
+#      context: .
+#      dockerfile: compose/celery/Dockerfile
+#    container_name: cel_worker
+#    depends_on:
+#      - redis
+#      - db
+#    volumes:
+#      - ./src:/src
+#    env_file:
+#      - ./envs/db_keys
+#    command: ["sh", "-c", "celery worker --app=birthdays --loglevel=info"]
+#
+#  calery_b:
+#    build:
+#      context: .
+#      dockerfile: compose/celery/Dockerfile
+#    container_name: cel_beat1
+#    depends_on:
+#      - redis
+#    volumes:
+#      - ./src:/src
+#    command: ["sh", "-c", "celery beat --app=birthdays"]
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx_calend_serv
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./applications:/applications
+      - ./config/nginx:/etc/nginx/conf.d
+    depends_on:
+      - web
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: calend_web_serv
+    env_file:
+      - ./envs/db_keys
+    volumes:
+      - ./applications:/applications
+    depends_on:
+      - db
+    command : ["sh", "-c", "gunicorn application.wsgi --reload -b 0.0.0.0:8000"]
+
+  db:
+    image: postgres
+    container_name: calend_db_serv
+    env_file:
+      - ./envs/db_keys
+    volumes:
+      - /psql_db/postgres_data:/var/lib/postgresql/data
+      - /psql_db/postgres_data_backups:/backups
+    ports:
+      - 5432:5432
+
+  adminer:
+    image: adminer
+    container_name: calend_admin_serv
+    ports:
+      - "8080:8080"
+
+  redis:
+    image: redis:3.2-alpine
+    container_name: calend_redis_serv
+    volumes:
+      - ./redis_data:/data
+
