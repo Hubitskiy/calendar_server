@@ -6,6 +6,7 @@ from rest_framework_simplejwt.views import TokenViewBase
 from djoser.views import UserCreateView as DjoserUserCreateView
 from djoser import signals
 from djoser.conf import settings
+from djoser.compat import get_user_email
 
 from .serializer import UserCreateSerializer, JWTAuthenticationSerializer
 
@@ -26,9 +27,10 @@ class CreateUserView(DjoserUserCreateView):
         signals.user_registered.send(
             sender=self.__class__, user=user, request=self.request
         )
+        context = {"user": user}
+        to = [get_user_email(user)]
         if settings.SEND_ACTIVATION_EMAIL:
-            from logging import warning
-            warning(f"SEND EMAIL {user.email}")
+            settings.EMAIL.activation(self.request, context).send(to)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -36,4 +38,3 @@ class CreateUserView(DjoserUserCreateView):
         self.perform_create(serializer)
         headers = self.get_success_headers(data=request.data)
         return Response(headers=headers, status=status.HTTP_204_NO_CONTENT)
-

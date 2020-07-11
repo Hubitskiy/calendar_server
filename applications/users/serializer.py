@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, get_user_model
 from django.core import exceptions as django_exceptions
 from django.db import transaction, IntegrityError
 from django.contrib.auth.password_validation import validate_password
@@ -46,7 +46,7 @@ class UserCreateSerializer(DjoserUserCreateSerializer):
             raise serializers.ValidationError("User with given credentials already exist")
         return value
 
-    def validate_password(self, attrs):
+    def validate(self, attrs):
         user = User(**attrs)
         password = attrs.get("password")
 

@@ -186,7 +186,7 @@ SIMPLE_JWT = {
 DJOSER = {
     'SERIALIZERS': {
         'user': 'djoser.serializers.UserSerializer',
-        'user_create': 'apps.user.serializer.UserCreateSerializer',
+        'user_create': 'users.serializer.UserCreateSerializer',
         # 'activation': 'apps.users.serializers.UserActivationSerializer',
     },
     'SEND_ACTIVATION_EMAIL': True,
