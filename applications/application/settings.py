@@ -99,7 +99,7 @@ DATABASES = {
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'timwer23@gmail.com'
-EMAIL_HOST_PASSWORD = '12111195Gh'
+EMAIL_HOST_PASSWORD = '12111195Gh12'
 EMAIL_PORT = 587
 
 # Password validation
@@ -189,7 +189,7 @@ DJOSER = {
     'SERIALIZERS': {
         'user': 'djoser.serializers.UserSerializer',
         'user_create': 'users.serializer.UserCreateSerializer',
-        # 'activation': 'apps.users.serializers.UserActivationSerializer',
+        'activation': 'users.serializer.UserActivateSerializer',
     },
     'SEND_ACTIVATION_EMAIL': True,
     'ACTIVATION_URL': 'auth/activate/{uid}/{token}',

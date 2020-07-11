@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, get_user_model
+from django.contrib.auth import authenticate
 from django.core import exceptions as django_exceptions
 from django.db import transaction, IntegrityError
 from django.contrib.auth.password_validation import validate_password
@@ -6,7 +6,10 @@ from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers, exceptions
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-from djoser.serializers import UserCreateSerializer as DjoserUserCreateSerializer
+from djoser.serializers import (
+    UserCreateSerializer as DjoserUserCreateSerializer,
+    ActivationSerializer as DjoserActivationSerializer
+)
 from djoser.conf import settings as djoser_settings
 
 from .models import User
@@ -77,4 +80,13 @@ class UserCreateSerializer(DjoserUserCreateSerializer):
         return user
 
     def update(self, instance, validated_data):
-        pass
+        raise NotImplementedError
+
+
+class UserActivateSerializer(DjoserActivationSerializer):
+
+    def create(self, validated_data):
+        self.user.is_active = True
+        self.user.save(update_fields=["is_active"])
+
+        return self.user
