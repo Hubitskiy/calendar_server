@@ -9,7 +9,7 @@ from djoser.conf import settings
 from djoser.compat import get_user_email
 
 from .serializer import UserCreateSerializer, JWTAuthenticationSerializer
-
+from djoser.serializers import ActivationSerializer
 
 class JWTAuthenticationView(TokenViewBase):
 
@@ -37,4 +37,5 @@ class CreateUserView(DjoserUserCreateView):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(data=request.data)
+
         return Response(headers=headers, status=status.HTTP_204_NO_CONTENT)

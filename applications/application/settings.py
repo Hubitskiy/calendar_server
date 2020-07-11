@@ -63,7 +63,9 @@ ROOT_URLCONF = 'application.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            '/applications/emails/templates'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -192,7 +194,7 @@ DJOSER = {
     'SEND_ACTIVATION_EMAIL': True,
     'ACTIVATION_URL': 'auth/activate/{uid}/{token}',
     'EMAIL': {
-        'activation': 'djoser.email.ActivationEmail',
+        'activation': 'emails.emails_templates.ActivationTemplate',
         'confirmation': 'djoser.email.ConfirmationEmail',
     }
         }
