@@ -1110,3 +1110,46 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.6/dist-packages/rest_framework/fields.py", line 475, in get_attribute
     raise type(exc)(msg)
 KeyError: "Got KeyError when attempting to get a value for field `uid` on serializer `UserActivateSerializer`.\nThe serializer field might be named incorrectly and not match any attribute or key on the `dict` instance.\nOriginal exception text was: 'uid'."
+Internal Server Error: /v1/users/activate/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.6/dist-packages/django/core/handlers/base.py", line 100, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/resolvers.py", line 536, in resolve
+    for pattern in self.url_patterns:
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/functional.py", line 80, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/resolvers.py", line 584, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/local/lib/python3.6/dist-packages/django/utils/functional.py", line 80, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/resolvers.py", line 577, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.6/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 678, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/applications/application/urls.py", line 10, in <module>
+    path('v1/users/', include('users.urls')),
+  File "/usr/local/lib/python3.6/dist-packages/django/urls/conf.py", line 34, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.6/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 678, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/applications/users/urls.py", line 8, in <module>
+    router.register('activate',ActivateUserView)
+  File "/usr/local/lib/python3.6/dist-packages/rest_framework/routers.py", line 100, in register
+    basename = self.get_default_basename(viewset)
+  File "/usr/local/lib/python3.6/dist-packages/rest_framework/routers.py", line 179, in get_default_basename
+    assert queryset is not None, '`basename` argument not specified, and could ' \
+AssertionError: `basename` argument not specified, and could not automatically determine the name from the viewset, as it does not have a `.queryset` attribute.

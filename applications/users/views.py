@@ -49,10 +49,11 @@ class CreateUserView(DjoserUserCreateView):
 class ActivateUserView(CreateModelMixin, GenericViewSet):
 
     serializer_class = UserActivateSerializer
-    permission_classes =[AllowAny]
+    permission_classes = [AllowAny]
     token_generator = default_token_generator
 
-    def _after_create(self, user_instance):
+    @staticmethod
+    def __after_create(user_instance):
         refresh = RefreshToken.for_user(user_instance)
 
         return {
@@ -65,7 +66,7 @@ class ActivateUserView(CreateModelMixin, GenericViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
-        data = self._after_create(serializer.instance)
+        data = self.__after_create(serializer.instance)
         headers = self.get_success_headers(data=request.data)
 
         return Response(headers=headers, status=status.HTTP_200_OK, data=data)

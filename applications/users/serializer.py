@@ -80,14 +80,13 @@ class UserCreateSerializer(DjoserUserCreateSerializer):
         return user
 
     def update(self, instance, validated_data):
-        pass
+        raise NotImplementedError
 
 
 class UserActivateSerializer(DjoserActivationSerializer):
 
     def create(self, validated_data):
-        user = self.user
-        user.is_active = True
-        user.save()
+        self.user.is_active = True
+        self.user.save(update_fields=["is_active"])
 
-        return user
+        return self.user
