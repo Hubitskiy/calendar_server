@@ -1153,3 +1153,6 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.6/dist-packages/rest_framework/routers.py", line 179, in get_default_basename
     assert queryset is not None, '`basename` argument not specified, and could ' \
 AssertionError: `basename` argument not specified, and could not automatically determine the name from the viewset, as it does not have a `.queryset` attribute.
+Forbidden: /v1/events/create/
+Forbidden: /v1/events/create/
+Bad Request: /v1/events/create/

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_filters',
 
     'users',
+    'events',
 
     'djoser',
 ]
@@ -195,7 +196,6 @@ DJOSER = {
     'ACTIVATION_URL': 'auth/activate/{uid}/{token}',
     'EMAIL': {
         'activation': 'emails.emails_templates.ActivationTemplate',
-        'confirmation': 'djoser.email.ConfirmationEmail',
     }
         }
 # Static files (CSS, JavaScript, Images)
