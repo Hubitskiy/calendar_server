@@ -57,8 +57,8 @@ class ActivateUserView(CreateModelMixin, GenericViewSet):
         refresh = RefreshToken.for_user(user_instance)
 
         return {
-            "access": str(refresh),
-            "refresh": str(refresh.access_token)
+            "access": str(refresh.access_token),
+            "refresh": str(refresh)
         }
 
     def create(self, request, *args, **kwargs):

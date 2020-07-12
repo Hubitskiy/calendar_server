@@ -6,11 +6,11 @@ from events.models import Event
 class EventFilter(filter.FilterSet):
     is_ended = filter.BooleanFilter(field_name="is_ended")
 
-    max_date_invitation = filter.DateTimeFilter(field_name="date_to_send_invitations", lookup_expr="gte")
-    min_date_invitation = filter.DateTimeFilter(field_name="date_to_send_invitations", lookup_expr="lte")
+    max_date_invitation = filter.DateTimeFilter(field_name="date_to_send_invitations", lookup_expr="lte")
+    min_date_invitation = filter.DateTimeFilter(field_name="date_to_send_invitations", lookup_expr="gte")
 
-    max_event_date = filter.DateTimeFilter(field_name="event_date", lookup_expr="gte")
-    min_event_date = filter.DateTimeFilter(field_name="event_date", lookup_expr="lte")
+    max_event_date = filter.DateTimeFilter(field_name="event_date", lookup_expr="lte")
+    min_event_date = filter.DateTimeFilter(field_name="event_date", lookup_expr="gte")
 
     class Meta:
         model = Event

@@ -1156,3 +1156,9 @@ AssertionError: `basename` argument not specified, and could not automatically d
 Forbidden: /v1/events/create/
 Forbidden: /v1/events/create/
 Bad Request: /v1/events/create/
+Bad Request: /v1/events/
+Forbidden: /v1/events/create/
+Forbidden: /v1/events/create/
+Bad Request: /v1/events/create/
+Bad Request: /v1/events/create/
+Forbidden: /v1/events/3/

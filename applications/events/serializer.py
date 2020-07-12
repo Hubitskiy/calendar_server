@@ -9,10 +9,10 @@ import pytz
 class CreateEventSerializer(serializers.Serializer):
 
     events_title = serializers.CharField(
-        max_length=30
+        max_length=30, required=True
     )
     description = serializers.CharField(
-        max_length=150
+        max_length=150, required=True
     )
     time_period = serializers.ChoiceField(
         choices=Event.TIME_PERIOD, allow_blank=False
